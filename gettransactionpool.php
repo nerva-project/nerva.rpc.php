@@ -21,8 +21,8 @@ $json = json_decode($obj);
 
 if(!array_key_exists('transactions', $json))
 {
-print_r($obj);
-return;
+	print_r($obj);
+	return;
 }
 
 $txs = $json->transactions;
@@ -54,7 +54,7 @@ foreach ($txs as &$x)
 
 $res = new stdClass();
 $res->spent_key_images = $ski;
-$res->result = $formatted;
+$res->transactions = $formatted;
 
 print_r(json_encode($res));
 ?>
