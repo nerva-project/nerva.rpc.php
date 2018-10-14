@@ -19,7 +19,6 @@ curl_close($ch);
 
 $json = json_decode($obj);
 
-//early exit if no data exists
 if(!array_key_exists('transactions', $json))
 {
 print_r($obj);
@@ -34,7 +33,7 @@ foreach ($txs as &$x)
 {
     $tx = new stdClass();
 
-    $f = $x->as_json;
+    $f = $x->tx_json;
     trim($f,'"');
     $f = str_replace(array("\\n", "\\r"), '', $f);
     $f = stripslashes($f);
