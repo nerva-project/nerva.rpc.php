@@ -4,8 +4,8 @@ require_once('./lib/helper.php');
 
 $params = array(
     "host" => $_GET["ip"],
-    "ban" => true,
-    "seconds" => 0
+    "ban" => $_GET["ban"],
+    "seconds" => $_GET["time"]
 );
 
 $json = send_request(HOST, PORT, "set_bans", $params);
