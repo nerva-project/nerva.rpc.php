@@ -1,6 +1,4 @@
-get_block_template
 submit_block
-get_connections
 flush_txpool
 get_output_histogram
 get_version
