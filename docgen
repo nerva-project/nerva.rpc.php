@@ -1,0 +1,41 @@
+#!/bin/bash
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+function parse()
+{
+    f=$(basename $1)
+    echo "<a href=\"$f\">$f</a>" >> ${dir}/index.html
+
+    while IFS= read line; do
+        if [[ $line = '//*'* ]]; then
+            if [[ $line = '//*desc:'* ]]; then
+                echo ${line:9} >> ${dir}/index.html
+            else
+                echo "   " ${line:3} >> ${dir}/index.html
+            fi
+        fi
+    done <"$f"
+
+    echo "" >> ${dir}/index.html
+}
+
+function writeheader()
+{
+    echo "<pre><h3>NERVA Public API</h3><ul>" > ${dir}/index.html
+}
+
+function writefooter()
+{
+    echo "</ul></pre>" >> ${dir}/index.html
+}
+
+function parsefiles()
+{
+    for fn in ${dir}/*.php; do
+        parse "${fn}"
+    done
+}
+
+writeheader
+parsefiles
+writefooter

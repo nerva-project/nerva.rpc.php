@@ -1,4 +1,8 @@
 <?php 
+//*desc: Block a node by the IP address
+//*ip: IP to ban
+//*ban: To ban or not true/false
+//*time: Number of seconds to ban for
 require_once('./lib/config.php');
 require_once('./lib/helper.php');
 

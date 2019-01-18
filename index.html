@@ -1,27 +1,80 @@
 <pre><h3>NERVA Public API</h3><ul>
+<a href="getbans.php">getbans.php</a>
+Gets a list of nodes blocked by this node
 
-This is not a complete list and is a WIP!
+<a href="getblockbyhash.php">getblockbyhash.php</a>
+Gets a block by it's hash
+    hash: Block hash to search for
 
-<li><a href="/supply.php">getsupply.php</a>
-Get the current circulating supply in atomic units.</li>
+<a href="getblockbyheight.php">getblockbyheight.php</a>
+Gets a block by it's height
+    height: Block height to search for
 
-<li><a href="/tradeogre.php">tradeogre.php</a>
-Get price information from the TradeOgre</li>
-                    
-<li><a href="/getlastblockheader.php">getlastblockheader.php</a>
-Block header information for the most recent block.</li>
+<a href="getblockcount.php">getblockcount.php</a>
+Gets the number of blocks in the longest chain
 
-<li><a href="/getblockheaderbyhash.php?hash=[block_hash]">getblockheaderbyhash.php?hash=[block_hash]</a>
-<li><a href="/getblockheaderbyheight.php?height=[block_height]">getblockheaderbyheight.php?height=[block_height]</a>
-Block header information can also be retrieved by hash or height.</li> 
+<a href="getblockhash.php">getblockhash.php</a>
+Gets a block hash at the specified height
+    hash: Block height to search for
 
+<a href="getblockheaderbyhash.php">getblockheaderbyhash.php</a>
+Gets a block header by it's hash
+    hash: Block hash to search for
 
-<li><a href="/getblockbyhash.php?hash=[block_hash]">getblockbyhash.php?hash=[block_hash]</a>
-<li><a href="/getblockbyheight.php?height=[block_height]">getblockbyheight.php?height=[block_height]</a>
-Full block information can also be retrieved by hash or height.</li> 
+<a href="getblockheaderbyheight.php">getblockheaderbyheight.php</a>
+Gets a block header by it's height
+    hash: Block height to search for
 
-<li><a href="/getinfo.php">getinfo.php</a>
-Retrieve general information about the state of your node and the network.
+<a href="getblockheadersrange.php">getblockheadersrange.php</a>
+Gets the block headers in the specified range
+    start_height: Height of the first block in the
+    end_height: Height of the last block in the range
 
-</ul>
-</pre>
+<a href="getblocktemplate.php">getblocktemplate.php</a>
+Gets a block template
+    address: Miner address to generate block template for
+    res: Reserve size
+
+<a href="getgeneratedcoins.php">getgeneratedcoins.php</a>
+Gets the number of coins generated in the chain
+
+<a href="gethardforkinfo.php">gethardforkinfo.php</a>
+Gets hardfork information
+
+<a href="getinfo.php">getinfo.php</a>
+gets the current node information
+
+<a href="getlastblockheader.php">getlastblockheader.php</a>
+Gets the last block header
+
+<a href="getminingstatus.php">getminingstatus.php</a>
+Gets the mining status of the node
+
+<a href="gettransactionpool.php">gettransactionpool.php</a>
+Gets a list of transactions in the pool
+
+<a href="gettransactionpoolstats.php">gettransactionpoolstats.php</a>
+Gets transaction pool statistics
+
+<a href="gettransactions.php">gettransactions.php</a>
+Gets a list of transactions by their hashes
+    hash[]: list of hashes to get tx data for
+    example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)
+
+<a href="gettxpubkey.php">gettxpubkey.php</a>
+extracts the TX public key from the TX.Extra data
+    extra: TX.Extra field to extract the pubkey from
+
+<a href="setbans.php">setbans.php</a>
+Block a node by the IP address
+    ip: IP to ban
+    ban: To ban or not true/false
+    time: Number of seconds to ban for
+
+<a href="supply.php">supply.php</a>
+Formatted version of getgeneratedcoins for CMC
+
+<a href="tradeogre.php">tradeogre.php</a>
+Get market data from TradeOgre
+
+</ul></pre>

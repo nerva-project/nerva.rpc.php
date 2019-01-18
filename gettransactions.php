@@ -1,7 +1,10 @@
 <?php 
+//*desc: Gets a list of transactions by their hashes
+//*hash[]: list of hashes to get tx data for
+//*example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)
 require_once('./lib/config.php');
 
-$hashes=$_GET['hash'];
+$hashes = $_GET['hash'];
 $params = array(
     "txs_hashes" => $hashes,
     "decode_as_json" => true

@@ -1,4 +1,5 @@
 <?php 
+//*desc: Gets transaction pool statistics
 require_once('./lib/config.php');
 
 $ch = curl_init();

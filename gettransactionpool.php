@@ -1,4 +1,5 @@
 <?php 
+//*desc: Gets a list of transactions in the pool
 require_once('./lib/config.php');
 
 $params = array(

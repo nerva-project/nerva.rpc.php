@@ -1,4 +1,5 @@
 <?php 
+//*desc: Get market data from TradeOgre
 $ch = curl_init();
 $url = 'https://tradeogre.com/api/v1/ticker/BTC-XNV';
 

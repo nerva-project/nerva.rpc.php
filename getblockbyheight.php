@@ -1,4 +1,6 @@
 <?php 
+//*desc: Gets a block by it's height
+//*height: Block height to search for
 require_once('./lib/config.php');
 require_once('./lib/helper.php');
 

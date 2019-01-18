@@ -1,4 +1,7 @@
 <?php 
+//*desc: Gets the block headers in the specified range
+//*start_height: Height of the first block in the 
+//*end_height: Height of the last block in the range
 require_once('./lib/config.php');
 require_once('./lib/helper.php');
 

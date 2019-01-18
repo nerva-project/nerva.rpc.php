@@ -1,4 +1,6 @@
 <?php 
+//*desc: Gets a block by it's hash
+//*hash: Block hash to search for
 require_once('./lib/config.php');
 require_once('./lib/helper.php');
 

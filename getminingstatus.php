@@ -1,4 +1,5 @@
 <?php 
+//*desc: Gets the mining status of the node
 require_once('./lib/config.php');
 
 
