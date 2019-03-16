@@ -22,7 +22,15 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $s);
 $obj=curl_exec($ch);
 curl_close($ch);
 
-$txs = json_decode($obj)->txs;
+$json = json_decode($obj);
+
+if (!isset($json->txs)) {
+    echo $obj;
+    return;
+}
+
+$txs = $json->txs;
+
 $formatted = array();
 
 foreach ($txs as &$x)

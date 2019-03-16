@@ -3,7 +3,7 @@
 require_once('./lib/config.php');
 
 $params = array(
-    "include_blob" => false
+    "json_only" => true
 );
 
 $s = json_encode($params);
@@ -20,10 +20,9 @@ curl_close($ch);
 
 $json = json_decode($obj);
 
-if(!array_key_exists('transactions', $json))
-{
-	print_r($obj);
-	return;
+if (!isset($json->transactions)) {
+    echo $obj;
+    return;
 }
 
 $txs = $json->transactions;
