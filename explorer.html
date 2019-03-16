@@ -1,0 +1,107 @@
+<h4>NERVA Public API</h4>
+<ul class="nerva-api-links">
+<li>
+<strong><a href="api/decodeoutputs.php">decodeoutputs.php</a></strong>
+<div>Decodes the amounts in the transaction hashes provided</div><div>WARNING: This function requires you to send your private view key to the server</div>
+<ul>
+<li>hash[]: list of hashes to get tx data for</li><li>address: the public address of the receiver</li><li>viewkey: the private view key of the receiver</li><li>example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)</li>
+</ul>
+<li>
+<strong><a href="api/getbans.php">getbans.php</a></strong>
+<div>Gets a list of nodes blocked by this node</div>
+<li>
+<strong><a href="api/getblockbyhash.php">getblockbyhash.php</a></strong>
+<div>Gets a block by it's hash</div>
+<ul>
+<li>hash: Block hash to search for</li>
+</ul>
+<li>
+<strong><a href="api/getblockbyheight.php">getblockbyheight.php</a></strong>
+<div>Gets a block by it's height</div>
+<ul>
+<li>height: Block height to search for</li>
+</ul>
+<li>
+<strong><a href="api/getblockcount.php">getblockcount.php</a></strong>
+<div>Gets the number of blocks in the longest chain</div>
+<li>
+<strong><a href="api/getblockhash.php">getblockhash.php</a></strong>
+<div>Gets a block hash at the specified height</div>
+<ul>
+<li>hash: Block height to search for</li>
+</ul>
+<li>
+<strong><a href="api/getblockheaderbyhash.php">getblockheaderbyhash.php</a></strong>
+<div>Gets a block header by it's hash</div>
+<ul>
+<li>hash: Block hash to search for</li>
+</ul>
+<li>
+<strong><a href="api/getblockheaderbyheight.php">getblockheaderbyheight.php</a></strong>
+<div>Gets a block header by it's height</div>
+<ul>
+<li>hash: Block height to search for</li>
+</ul>
+<li>
+<strong><a href="api/getblockheadersrange.php">getblockheadersrange.php</a></strong>
+<div>Gets the block headers in the specified range</div>
+<ul>
+<li>start_height: Height of the first block in the </li><li>end_height: Height of the last block in the range</li>
+</ul>
+<li>
+<strong><a href="api/getblocktemplate.php">getblocktemplate.php</a></strong>
+<div>Gets a block template</div>
+<ul>
+<li>address: Miner address to generate block template for</li><li>res: Reserve size</li>
+</ul>
+<li>
+<strong><a href="api/getconnections.php">getconnections.php</a></strong>
+<div>Gets the number of blocks in the longest chain</div>
+<li>
+<strong><a href="api/getgeneratedcoins.php">getgeneratedcoins.php</a></strong>
+<div>Gets the number of coins generated in the chain</div>
+<li>
+<strong><a href="api/gethardforkinfo.php">gethardforkinfo.php</a></strong>
+<div>Gets hardfork information</div>
+<li>
+<strong><a href="api/getinfo.php">getinfo.php</a></strong>
+<div>gets the current node information</div>
+<li>
+<strong><a href="api/getlastblockheader.php">getlastblockheader.php</a></strong>
+<div>Gets the last block header</div>
+<li>
+<strong><a href="api/getminingstatus.php">getminingstatus.php</a></strong>
+<div>Gets the mining status of the node</div>
+<li>
+<strong><a href="api/gettransactionpool.php">gettransactionpool.php</a></strong>
+<div>Gets a list of transactions in the pool</div>
+<li>
+<strong><a href="api/gettransactionpoolstats.php">gettransactionpoolstats.php</a></strong>
+<div>Gets transaction pool statistics</div>
+<li>
+<strong><a href="api/gettransactions.php">gettransactions.php</a></strong>
+<div>Gets a list of transactions by their hashes</div>
+<ul>
+<li>hash[]: list of hashes to get tx data for</li><li>example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)</li>
+</ul>
+<li>
+<strong><a href="api/gettxpubkey.php">gettxpubkey.php</a></strong>
+<div>extracts the TX public key from the TX.Extra data</div>
+<ul>
+<li>extra: TX.Extra field to extract the pubkey from</li>
+</ul>
+<li>
+<strong><a href="api/setbans.php">setbans.php</a></strong>
+<div>Block a node by the IP address</div>
+<ul>
+<li>ip: IP to ban</li><li>ban: To ban or not true/false</li><li>time: Number of seconds to ban for</li>
+</ul>
+<li>
+<strong><a href="api/submitanalytics.php">submitanalytics.php</a></strong>
+<li>
+<strong><a href="api/supply.php">supply.php</a></strong>
+<div>Formatted version of getgeneratedcoins for CMC</div>
+<li>
+<strong><a href="api/tradeogre.php">tradeogre.php</a></strong>
+<div>Get market data from TradeOgre</div>
+</ul>

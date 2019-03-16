@@ -1,0 +1,60 @@
+#!/bin/bash
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+html_file=explorer.html
+
+function parse()
+{
+    f=$(basename $1)
+    echo "<li>" >> ${dir}/${html_file}
+    echo "<strong><a href=\"api/$f\">$f</a></strong>" >> ${dir}/${html_file}
+
+    desc=()
+    params=()
+
+    while IFS= read line; do
+        if [[ $line = '//*'* ]]; then
+            if [[ $line = '//*desc:'* ]]; then
+                desc+="<div>${line:9}</div>" >> ${dir}/${html_file}
+            else
+                params+="<li>${line:3}</li>" >> ${dir}/${html_file}
+            fi
+        fi
+    done <"$f"
+
+    for d in "${desc[@]}"
+    do
+        echo $d >> ${dir}/${html_file}
+    done
+
+    if [ ${#params[@]} -ne 0 ]; then
+        echo "<ul>" >> ${dir}/${html_file}
+        for p in "${params[@]}"
+        do
+            echo $p >> ${dir}/${html_file}
+        done
+        echo "</ul>" >> ${dir}/${html_file}
+    fi
+}
+
+function writeheader()
+{
+    echo "<h4>NERVA Public API</h4>" > ${dir}/${html_file}
+    echo "<ul class=\"nerva-api-links\">" >> ${dir}/${html_file}
+}
+
+function writefooter()
+{
+    echo "</ul>" >> ${dir}/${html_file}
+}
+
+function parsefiles()
+{
+    for fn in ${dir}/*.php; do
+        parse "${fn}"
+    done
+}
+
+writeheader
+parsefiles
+writefooter
