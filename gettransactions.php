@@ -45,7 +45,11 @@ foreach ($txs as &$x)
     $tx->block_timestamp = $x->block_timestamp;
     $tx->double_spend_seen = $x->double_spend_seen;
     $tx->in_pool = $x->in_pool;
-    $tx->output_indices = $x->output_indices;
+    if (isset($x->output_indices)) {
+        $tx->output_indices = $x->output_indices;
+    } else {
+        $tx->output_indices = [];
+    }
     $tx->tx_hash = $x->tx_hash;
     $tx->json = json_decode($f);
     $formatted[] = $tx;
