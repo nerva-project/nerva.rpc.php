@@ -16,7 +16,6 @@ if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])){
 }
 
 if ($ip == "127.0.0.1") {
-    print_r("localhost not allowed\n");
     http_response_code(403);
     return;
 }
@@ -30,7 +29,6 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) {
 //means someone actually has to put in effort to spam it
 
 if ($ua == "NA" || substr($ua, 0, 9) != "nerva-cli") {
-    print_r("Invalid user agent\n");
     http_response_code(403);
     return;
 }
@@ -45,17 +43,14 @@ $json = send_request(ANALYTICS_HOST, ANALYTICS_PORT, "submit", $params);
 $arr = json_decode($json);
 
 if (!isset($arr) || !isset($arr->status)) {
-    print_r("NAK\n");
     http_response_code(500);
     return;
 }
 
 if ($arr->status == "OK") {
-    print_r("ACK\n");
     http_response_code(200);
 }
 else {
-    print_r("NAK\n");
     http_response_code(500);
 }
 ?>
