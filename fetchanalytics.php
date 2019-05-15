@@ -3,15 +3,15 @@
 require_once('./lib/config.php');
 require_once('./lib/analytics_helper.php');
 
-$limit = $_GET["limit"];
+$limit = 7;
 
-if (!isset($limit)) {
-    $limit = 0;
+if (isset($_GET["limit"])) {
+    $limit = $_GET["limit"];
 }
 
 $params = array(
     "time" => strtotime('today midnight'),
-    "limit" = $_GET["limit"],
+    "limit" => $limit
 );
 
 $json = send_request(ANALYTICS_HOST, ANALYTICS_PORT, "fetch", $params);
