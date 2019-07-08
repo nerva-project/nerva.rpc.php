@@ -1,6 +1,7 @@
 <?php 
-define('HOST', '127.0.0.1');
-define('PORT', 17566);
+define('HOST', 'localhost');
+define('DAEMON_PORT', 17566);
+define('WALLET_PORT', 19566);
 define('ANALYTICS_HOST', HOST);
 define('ANALYTICS_PORT', 15236);
 define('DEBUG', true);

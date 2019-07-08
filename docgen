@@ -3,9 +3,10 @@ dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 function parse()
 {
-    f=$(basename $1)
-    echo "<a href=\"$f\">$f</a>" >> ${dir}/index.html
-
+    full_path=$1
+    dir_name=$(dirname ${full_path})
+    echo "<a href=\"./${dir_name}/\">${dir_name}</a>" >> ${dir}/index.html
+    
     while IFS= read line; do
         if [[ $line = '//*'* ]]; then
             if [[ $line = '//*desc:'* ]]; then
@@ -14,28 +15,32 @@ function parse()
                 echo "   " ${line:3} >> ${dir}/index.html
             fi
         fi
-    done <"$f"
-
+    done <"${full_path}"
+    
     echo "" >> ${dir}/index.html
 }
 
-function writeheader()
+function section()
 {
-    echo "<pre><h3>NERVA Public API</h3><ul>" > ${dir}/index.html
-}
+    name=$1
+    name_lower=$(echo "${name}" | tr '[:upper:]' '[:lower:]')
 
-function writefooter()
-{
+    echo "<pre><h4>${name}</h4><ul>" >> ${dir}/index.html
+
+    cd ${dir}/${name_lower}
+    files=($(find . -name *.php))
+    cd ${dir}
+
+    for fn in "${files[@]}"; do
+        file="${name_lower}/${fn:2:${#fn}}"
+        parse ${file}
+    done
+
     echo "</ul></pre>" >> ${dir}/index.html
 }
 
-function parsefiles()
-{
-    for fn in ${dir}/*.php; do
-        parse "${fn}"
-    done
-}
-
-writeheader
-parsefiles
-writefooter
+echo "<pre><h3>NERVA Public API</h3></pre>" > ${dir}/index.html
+section Daemon
+section Wallet
+section External
+section Analytics

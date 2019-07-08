@@ -1,114 +1,229 @@
-<h4>NERVA Public API</h4>
-<ul class="nerva-api-links">
-<li>
-<strong><a href="api/decodeoutputs.php">decodeoutputs.php</a></strong>
-<div>Decodes the amounts in the transaction hashes provided</div><div>WARNING: This function requires you to send your private view key to the server</div>
+
+<div class="row well bs-component">
+<form class="form-horizontal">
+<fieldset>
+<div class="col-md-12">
+<div class="form-group">
+<h4>Daemon</h4>
+<div>
+<strong><a href="./api/daemon/get_transaction_pool_stats/">daemon/get_transaction_pool_stats</a></strong>
+<div>Gets transaction pool statistics</div>
 <ul>
-<li>hash[]: list of hashes to get tx data for</li><li>address: the public address of the receiver</li><li>viewkey: the private view key of the receiver</li><li>example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)</li>
 </ul>
-<li>
-<strong><a href="api/fetchanalytics.php">fetchanalytics.php</a></strong>
-<div>Gets the number of blocks in the longest chain</div>
-<li>
-<strong><a href="api/getbans.php">getbans.php</a></strong>
-<div>Gets a list of nodes blocked by this node</div>
-<li>
-<strong><a href="api/getblockbyhash.php">getblockbyhash.php</a></strong>
-<div>Gets a block by it's hash</div>
+<strong><a href="./api/daemon/get_tx_pubkey/">daemon/get_tx_pubkey</a></strong>
+<div>Extracts the TX public key from the TX.Extra data</div>
 <ul>
-<li>hash: Block hash to search for</li>
+<li>extra: TX.Extra field to extract the pubkey from</li>
 </ul>
-<li>
-<strong><a href="api/getblockbyheight.php">getblockbyheight.php</a></strong>
-<div>Gets a block by it's height</div>
+<strong><a href="./api/daemon/mining_status/">daemon/mining_status</a></strong>
+<div>Gets the mining status of the node</div>
 <ul>
-<li>height: Block height to search for</li>
 </ul>
-<li>
-<strong><a href="api/getblockcount.php">getblockcount.php</a></strong>
-<div>Gets the number of blocks in the longest chain</div>
-<li>
-<strong><a href="api/getblockhash.php">getblockhash.php</a></strong>
-<div>Gets a block hash at the specified height</div>
-<ul>
-<li>hash: Block height to search for</li>
-</ul>
-<li>
-<strong><a href="api/getblockheaderbyhash.php">getblockheaderbyhash.php</a></strong>
-<div>Gets a block header by it's hash</div>
-<ul>
-<li>hash: Block hash to search for</li>
-</ul>
-<li>
-<strong><a href="api/getblockheaderbyheight.php">getblockheaderbyheight.php</a></strong>
-<div>Gets a block header by it's height</div>
-<ul>
-<li>hash: Block height to search for</li>
-</ul>
-<li>
-<strong><a href="api/getblockheadersrange.php">getblockheadersrange.php</a></strong>
+<strong><a href="./api/daemon/get_block_headers_range/">daemon/get_block_headers_range</a></strong>
 <div>Gets the block headers in the specified range</div>
 <ul>
 <li>start_height: Height of the first block in the </li><li>end_height: Height of the last block in the range</li>
 </ul>
-<li>
-<strong><a href="api/getblocktemplate.php">getblocktemplate.php</a></strong>
+<strong><a href="./api/daemon/decode_outputs/">daemon/decode_outputs</a></strong>
+<div>Decodes the amounts in the transaction hashes provided</div><div>WARNING: This function requires you to send your private view key to the server</div>
+<ul>
+<li>hash[]: list of hashes to get tx data for</li><li>address: the public address of the receiver</li><li>viewkey: the private view key of the receiver</li><li>example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)</li>
+</ul>
+<strong><a href="./api/daemon/get_connections/">daemon/get_connections</a></strong>
+<div>Gets the number of blocks in the longest chain</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_transaction_pool/">daemon/get_transaction_pool</a></strong>
+<div>Gets a list of transactions in the pool</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_bans/">daemon/get_bans</a></strong>
+<div>Gets a list of nodes blocked by this node</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_block_count/">daemon/get_block_count</a></strong>
+<div>Gets the number of blocks in the longest chain</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_generated_coins/">daemon/get_generated_coins</a></strong>
+<div>Gets the number of coins generated in the chain</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/hard_fork_info/">daemon/hard_fork_info</a></strong>
+<div>Gets hardfork information</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_last_block_header/">daemon/get_last_block_header</a></strong>
+<div>Gets the last block header</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_block_template/">daemon/get_block_template</a></strong>
 <div>Gets a block template</div>
 <ul>
 <li>address: Miner address to generate block template for</li><li>res: Reserve size</li>
 </ul>
-<li>
-<strong><a href="api/getconnections.php">getconnections.php</a></strong>
-<div>Gets the number of blocks in the longest chain</div>
-<li>
-<strong><a href="api/getgeneratedcoins.php">getgeneratedcoins.php</a></strong>
-<div>Gets the number of coins generated in the chain</div>
-<li>
-<strong><a href="api/gethardforkinfo.php">gethardforkinfo.php</a></strong>
-<div>Gets hardfork information</div>
-<li>
-<strong><a href="api/getinfo.php">getinfo.php</a></strong>
-<div>gets the current node information</div>
-<li>
-<strong><a href="api/getlastblockheader.php">getlastblockheader.php</a></strong>
-<div>Gets the last block header</div>
-<li>
-<strong><a href="api/getminingstatus.php">getminingstatus.php</a></strong>
-<div>Gets the mining status of the node</div>
-<li>
-<strong><a href="api/getpeerlist.php">getpeerlist.php</a></strong>
-<div>Gets the peer list of the node</div>
-<li>
-<strong><a href="api/gettransactionpool.php">gettransactionpool.php</a></strong>
-<div>Gets a list of transactions in the pool</div>
-<li>
-<strong><a href="api/gettransactionpoolstats.php">gettransactionpoolstats.php</a></strong>
-<div>Gets transaction pool statistics</div>
-<li>
-<strong><a href="api/gettransactions.php">gettransactions.php</a></strong>
+<strong><a href="./api/daemon/get_block/">daemon/get_block</a></strong>
+<div>Gets a block by it's hash</div>
+<ul>
+<li>hash: Block hash to search for</li>
+</ul>
+<strong><a href="./api/daemon/get_transactions/">daemon/get_transactions</a></strong>
 <div>Gets a list of transactions by their hashes</div>
 <ul>
 <li>hash[]: list of hashes to get tx data for</li><li>example: gettransactions.php?hash[]=(hash1)&hash[]=(hash2)</li>
 </ul>
-<li>
-<strong><a href="api/gettxpubkey.php">gettxpubkey.php</a></strong>
-<div>extracts the TX public key from the TX.Extra data</div>
+<strong><a href="./api/daemon/get_peer_list/">daemon/get_peer_list</a></strong>
+<div>Gets the peer list of the node</div>
 <ul>
-<li>extra: TX.Extra field to extract the pubkey from</li>
 </ul>
-<li>
-<strong><a href="api/setbans.php">setbans.php</a></strong>
+<strong><a href="./api/daemon/get_block_header_by_hash/">daemon/get_block_header_by_hash</a></strong>
+<div>Gets a block header by it's hash</div>
+<ul>
+<li>hash: Block hash to search for</li>
+</ul>
+<strong><a href="./api/daemon/get_info/">daemon/get_info</a></strong>
+<div>gets the current node information</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/set_bans/">daemon/set_bans</a></strong>
 <div>Block a node by the IP address</div>
 <ul>
 <li>ip: IP to ban</li><li>ban: To ban or not true/false</li><li>time: Number of seconds to ban for</li>
 </ul>
-<li>
-<strong><a href="api/submitanalytics.php">submitanalytics.php</a></strong>
-<div>Submits the callers IP address to the node map</div>
-<li>
-<strong><a href="api/supply.php">supply.php</a></strong>
-<div>Formatted version of getgeneratedcoins for CMC</div>
-<li>
-<strong><a href="api/tradeogre.php">tradeogre.php</a></strong>
-<div>Get market data from TradeOgre</div>
+<strong><a href="./api/daemon/get_block_header_by_height/">daemon/get_block_header_by_height</a></strong>
+<div>Gets a block header by it's height</div>
+<ul>
+<li>hash: Block height to search for</li>
 </ul>
+<strong><a href="./api/daemon/start_mining/">daemon/start_mining</a></strong>
+<div>Starts mining on the node</div>
+<ul>
+<li>address: The address to mine to</li><li>threads: The number of threads to use (optional, default: 0/auto)</li><li>background: Set to mine in the background (optional, default: false)</li><li>ignore_battery: Ignore battery level when mining (optional, default: true)</li>
+</ul>
+<strong><a href="./api/daemon/stop_mining/">daemon/stop_mining</a></strong>
+<div>Stops mining on the node</div>
+<ul>
+</ul>
+<strong><a href="./api/daemon/get_block_hash/">daemon/get_block_hash</a></strong>
+<div>Gets a block hash at the specified height</div>
+<ul>
+<li>hash: Block height to search for</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
+<div class="row well bs-component">
+<form class="form-horizontal">
+<fieldset>
+<div class="col-md-12">
+<div class="form-group">
+<h4>Wallet</h4>
+<div>
+<strong><a href="./api/wallet/get_address/">wallet/get_address</a></strong>
+<div>Gets the address of the wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div>
+<ul>
+<li>account_index: The file name of the newly created wallet</li>
+</ul>
+<strong><a href="./api/wallet/create_wallet/">wallet/create_wallet</a></strong>
+<div>Creates a new wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div><div>WARNING: This function requires you to send your password to the server</div>
+<ul>
+<li>filename: the faile name of the newly created wallet</li><li>password: Password of the new wallet (optional)</li><li>language: the private view key of the receiver (optional, default to English)</li>
+</ul>
+<strong><a href="./api/wallet/get_balance/">wallet/get_balance</a></strong>
+<div>Gets the balance of the wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div>
+<ul>
+<li>account_index: Index to get the balance of (optional, default: 0)</li>
+</ul>
+<strong><a href="./api/wallet/open_wallet/">wallet/open_wallet</a></strong>
+<div>Opens a wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div><div>WARNING: This function requires you to send your wallet password to the server</div>
+<ul>
+<li>filename: The file name of the newly created wallet</li><li>password: Password of the new wallet (optional, leave blank for no password)</li>
+</ul>
+<strong><a href="./api/wallet/restore_wallet_from_keys/">wallet/restore_wallet_from_keys</a></strong>
+<div>Creates a new wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div><div>WARNING: This function requires you to send your restored wallet password to the server</div><div>WARNING: This function requires you to send your private keys to the server</div>
+<ul>
+<li>filename: The file name of the newly created wallet</li><li>address: The address of the wallet to restore</li><li>spendkey: The private spend key of the wallet to restore</li><li>viewkey: The private view key of the wallet to restore</li><li>password: Password of the new wallet (optional)</li><li>language: The language to use for the restored wallet seed (optional, default: 'English')</li><li>restore_height: The height to restore the wallet from (optional, default: 0)</li>
+</ul>
+<strong><a href="./api/wallet/transfer/">wallet/transfer</a></strong>
+<div>Transfer funds</div>
+<ul>
+<li>address: Address to transfer to</li><li>amount: Amount to send in atomic units</li>
+</ul>
+<strong><a href="./api/wallet/get_transfers/">wallet/get_transfers</a></strong>
+<div>Gets the transfers to/from the wallet.</div>
+<ul>
+<li>account_index: Index to get the transfer for (optional, default: 0)</li><li>min_height: The minimum height to return results from (optional, default: 0)</li>
+</ul>
+<strong><a href="./api/wallet/sweep_dust/">wallet/sweep_dust</a></strong>
+<div>Sweeps the dust outputs back to the wallet.</div>
+<ul>
+</ul>
+<strong><a href="./api/wallet/restore_wallet_from_seed/">wallet/restore_wallet_from_seed</a></strong>
+<div>Creates a new wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div><div>WARNING: This function requires you to send your restored wallet password to the server</div><div>WARNING: This function requires you to send your mnemonic seed to the server</div>
+<ul>
+<li>filename: the file name of the newly created wallet</li><li>seed: The mnemonic seed of the wallet to restore</li><li>seed_offset: The offset used to originally generate the seed (optional, default: null)</li><li>password: Password of the new wallet (optional)</li><li>language: the private view key of the receiver (optional, default: English)</li><li>restore_height: The height to restore the wallet from (optional, default: 0)</li>
+</ul>
+<strong><a href="./api/wallet/sweep_all/">wallet/sweep_all</a></strong>
+<div>Transfer funds</div>
+<ul>
+<li>address: Address to transfer to</li><li>amount: Amount to send in atomic units</li>
+</ul>
+<strong><a href="./api/wallet/close_wallet/">wallet/close_wallet</a></strong>
+<div>Closes the open wallet.</div><div>NOTE: RPC wallet must have --wallet-dir flag set to work</div>
+<ul>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
+<div class="row well bs-component">
+<form class="form-horizontal">
+<fieldset>
+<div class="col-md-12">
+<div class="form-group">
+<h4>External</h4>
+<div>
+<strong><a href="./api/external/tradeogre/">external/tradeogre</a></strong>
+<div>Get market data from TradeOgre</div>
+<ul>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
+<div class="row well bs-component">
+<form class="form-horizontal">
+<fieldset>
+<div class="col-md-12">
+<div class="form-group">
+<h4>Analytics</h4>
+<div>
+<strong><a href="./api/analytics/prune/">analytics/prune</a></strong>
+<div>Submits the callers IP address to the node map</div>
+<ul>
+</ul>
+<strong><a href="./api/analytics/fetch/">analytics/fetch</a></strong>
+<div>Gets the number of blocks in the longest chain</div>
+<ul>
+</ul>
+<strong><a href="./api/analytics/submit/">analytics/submit</a></strong>
+<div>Submits the callers IP address to the node map</div>
+<ul>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+</div>
