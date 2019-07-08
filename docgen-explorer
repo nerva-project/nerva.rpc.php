@@ -5,9 +5,10 @@ html_file=explorer.html
 
 function parse()
 {
-    f=$(basename $1)
-    echo "<li>" >> ${dir}/${html_file}
-    echo "<strong><a href=\"api/$f\">$f</a></strong>" >> ${dir}/${html_file}
+    full_path=$1
+    dir_name=$(dirname ${full_path})
+
+    echo "<strong><a href=\"./api/${dir_name}/\">${dir_name}</a></strong>" >> ${dir}/${html_file}
 
     desc=()
     params=()
@@ -20,41 +21,56 @@ function parse()
                 params+="<li>${line:3}</li>" >> ${dir}/${html_file}
             fi
         fi
-    done <"$f"
+    done <"${full_path}"
 
-    for d in "${desc[@]}"
-    do
+    for d in "${desc[@]}"; do
         echo $d >> ${dir}/${html_file}
     done
 
-    if [ ${#params[@]} -ne 0 ]; then
-        echo "<ul>" >> ${dir}/${html_file}
-        for p in "${params[@]}"
-        do
-            echo $p >> ${dir}/${html_file}
-        done
-        echo "</ul>" >> ${dir}/${html_file}
-    fi
-}
+    echo "<ul>" >> ${dir}/${html_file}
 
-function writeheader()
-{
-    echo "<h4>NERVA Public API</h4>" > ${dir}/${html_file}
-    echo "<ul class=\"nerva-api-links\">" >> ${dir}/${html_file}
-}
+    for p in "${params[@]}"; do
+        echo $p >> ${dir}/${html_file}
+    done
 
-function writefooter()
-{
     echo "</ul>" >> ${dir}/${html_file}
 }
 
-function parsefiles()
+function section()
 {
-    for fn in ${dir}/*.php; do
-        parse "${fn}"
+    name=$1
+    name_lower=$(echo "${name}" | tr '[:upper:]' '[:lower:]')
+
+    echo "<div class=\"row well bs-component\">"    >> ${dir}/${html_file}
+    echo "<form class=\"form-horizontal\">"         >> ${dir}/${html_file}
+    echo "<fieldset>"                               >> ${dir}/${html_file}
+    echo "<div class=\"col-md-12\">"                >> ${dir}/${html_file}
+    echo "<div class=\"form-group\">"               >> ${dir}/${html_file}
+
+    echo "<h4>${name}</h4>"          >> ${dir}/${html_file}
+    echo "<div>"                                    >> ${dir}/${html_file}
+
+    cd ${dir}/${name_lower}
+    files=($(find . -name *.php))
+    cd ${dir}
+
+    for fn in "${files[@]}"; do
+        file="${name_lower}/${fn:2:${#fn}}"
+        parse ${file}
     done
+
+    echo "</ul>" >> ${dir}/${html_file}
+    echo "</div>" >> ${dir}/${html_file}
+    echo "</div>" >> ${dir}/${html_file}
+    echo "</div>" >> ${dir}/${html_file}
+    echo "</fieldset>" >> ${dir}/${html_file}
+    echo "</form>" >> ${dir}/${html_file}
+    echo "</div>" >> ${dir}/${html_file}
 }
 
-writeheader
-parsefiles
-writefooter
+echo > ${dir}/${html_file}
+
+section Daemon
+section Wallet
+section External
+section Analytics
