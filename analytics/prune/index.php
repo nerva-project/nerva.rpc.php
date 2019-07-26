@@ -1,5 +1,5 @@
 <?php
-//*desc: Submits the callers IP address to the node map
+//*desc: Prune stale nodes from the node map. Requires and API key
 require_once('./lib/config.php');
 require_once('./lib/analytics_helper.php');
 

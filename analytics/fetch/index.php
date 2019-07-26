@@ -1,5 +1,5 @@
 <?php
-//*desc: Gets the number of blocks in the longest chain
+//*desc: Fetch analytics data
 require_once('./lib/config.php');
 require_once('./lib/analytics_helper.php');
 
