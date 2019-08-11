@@ -1,7 +1,7 @@
 <?php
 //*desc: Fetch analytics data
-require_once('./lib/config.php');
-require_once('./lib/analytics_helper.php');
+require_once('../../lib/config.php');
+require_once('../../lib/analytics_helper.php');
 
 $limit = 7;
 

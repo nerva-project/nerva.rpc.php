@@ -16,7 +16,7 @@ function send_request($host, $port, $method, $params)
     $s = generate_json_rpc_header($method, $params);
 
     $ch = curl_init();
-    $url = 'http://'.$host.':'.$port;
+    $url = 'http://'.$host.':'.$port.'/'.$method;
 
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
