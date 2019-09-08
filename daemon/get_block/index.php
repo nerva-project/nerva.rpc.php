@@ -29,16 +29,21 @@ else if (isset($_GET['height'])) {
 
 $json = send_json_rpc_request(HOST, DAEMON_PORT, 'get_block', $params);
 $arr = json_decode($json);
-$f = $arr->result->json;
-trim($f,'"');
-$f = str_replace(array("\\n", "\\r"), '', $f);
-$f = stripslashes($f);
+if ($arr->result == null) {
+    echo $json;
+}
+else {
+    $f = $arr->result->json;
+    trim($f,'"');
+    $f = str_replace(array("\\n", "\\r"), '', $f);
+    $f = stripslashes($f);
 
-$json_arr = json_decode($f);
-$arr->result->json = $json_arr;
+    $json_arr = json_decode($f);
+    $arr->result->json = $json_arr;
 
-$formatted = json_encode($arr);
+    $formatted = json_encode($arr);
 
-print_r($formatted);
+    print_r($formatted);
+}
 
 ?>
