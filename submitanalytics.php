@@ -1,7 +1,7 @@
 <?php
 //*desc: Submits the callers IP address to the node map
-require_once('../../lib/config.php');
-require_once('../../lib/analytics_helper.php');
+require_once('./lib/config.php');
+require_once('./lib/analytics_helper.php');
 
 $ip = 'NA';
 $ua = 'NA';
