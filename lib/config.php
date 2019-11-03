@@ -7,6 +7,7 @@ define('ANALYTICS_PORT', 15236);
 define('DEBUG', true);
 
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: http://localhost');
 
 if (DEBUG)
 {
