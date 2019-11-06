@@ -3,6 +3,10 @@
 require_once('../../lib/config.php');
 require_once('../../lib/helper.php');
 
+header('Access-Control-Allow-Origin: http://localhost,http://localhost:17500,http://localhost:3001');
+
+$error = false;
+
 if (!isset($_GET['endpoint'])) {
     echo 'Need parameter: endpoint\n';
     $error = true;
@@ -13,7 +17,15 @@ if ($error)
 
 $endpoint=$_GET['endpoint'];
 
-$json = send_json_rpc_request(HOST, DAEMON_PORT, $endpoint, null);
+ob_start();
+include '../'.$endpoint.'/index.php';
+$json = ob_get_clean();
+
 $arr = json_decode($json);
-echo json_encode($arr->result);
+if (isset($arr->result)) {
+    echo json_encode($arr->result);
+} else {
+    echo $json;
+}
+
 ?>
