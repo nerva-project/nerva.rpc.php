@@ -3,8 +3,6 @@
 require_once('../../lib/config.php');
 require_once('../../lib/helper.php');
 
-header('Access-Control-Allow-Origin: http://localhost,http://localhost:17500,http://localhost:3001');
-
 $error = false;
 
 if (!isset($_GET['endpoint'])) {
