@@ -31,7 +31,10 @@ if ($error)
 
 $params = array(
     'destinations' => array(
-        array('address' => $address, 'amount' => $amount)
+        array(
+            'address' => $_GET['address'], 
+            'amount' => $_GET['amount']
+        )
     ),
     'account_index' => $account_index,
     'priority' => $priority,
