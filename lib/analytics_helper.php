@@ -27,4 +27,9 @@ function send_request($host, $port, $method, $params)
 
     return $obj;
 }
+
+function starts_with($full, $part)
+{
+    return strncmp($full, $part, strlen($part)) === 0;
+}
 ?>

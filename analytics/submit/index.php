@@ -15,7 +15,8 @@ if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])){
     $ip = $_SERVER['REMOTE_ADDR'];
 }
 
-if ($ip == "127.0.0.1") {
+//block common lan ip's
+if (starts_with($ip, "127.") || starts_with($ip, "10.") || starts_with($ip, "192.")) {
     http_response_code(403);
     return;
 }
