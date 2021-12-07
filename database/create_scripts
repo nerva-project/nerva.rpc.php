@@ -1,0 +1,17 @@
+CREATE DATABASE node_map;
+
+USE node_map;
+
+CREATE USER 'your_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_PASSWORD';
+GRANT ALL PRIVILEGES ON node_map.* TO 'your_user'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE TABLE nodes (
+    address             VARCHAR(20) NOT NULL PRIMARY KEY,
+    version             VARCHAR(20),
+    last_access_time    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    latitude            FLOAT,
+    longitude           FLOAT,
+    continent_code      VARCHAR(10),
+    country_code        VARCHAR(10)
+);
