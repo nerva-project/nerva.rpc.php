@@ -4,6 +4,7 @@ require_once('../../lib/config.php');
 require_once('../../lib/analytics_helper.php');
 
 if(ANALYTICS_DISABLED) {
+    error_log("Analytics diabled\n", 3, LOG_FILE);
     echo 'Analytics disabled.';
     http_response_code(200);
     return;
@@ -16,7 +17,7 @@ $password = DB_USER_PASSWORD;
 
 $ip = 'NA';
 $ua = 'NA';
- 
+
 //Check to see if the CF-Connecting-IP header exists.
 if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])){
     //If it does, assume that PHP app is behind Cloudflare.
@@ -28,6 +29,7 @@ if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])){
 
 //block common lan ip's
 if (starts_with($ip, "127.") || starts_with($ip, "10.") || starts_with($ip, "192.")) {
+    error_log("Access from LAN addresses prohibited. IP: " . $ip . "\n", 3, LOG_FILE);
     echo 'Access from LAN addresses prohibited.';
     http_response_code(403);
     return;
@@ -42,37 +44,44 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) {
 //means someone actually has to put in effort to spam it
 
 if ($ua == "NA" || substr($ua, 0, 9) != "nerva-cli") {
+    error_log("Invalid user agent : " . $ua . "\n", 3, LOG_FILE);
     echo 'Invalid user agent string.';
     http_response_code(403);
     return;
 }
 
 $version = substr($ua, 10);
+error_log("IP: " . $ip . " | Version : " . $version . "\n", 3, LOG_FILE);
 
 // Create database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    error_log("Connection failed: ". $conn->connect_error . "\n", 3, LOG_FILE);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 // Query to see if node already known
 $sql = "SELECT * FROM nodes WHERE address = '$ip'";
+error_log("Looking up existing IP record: ". $ip . "\n", 3, LOG_FILE);
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Node already known so just update it    
     $sqlUpdate = "UPDATE nodes SET version = '$version' WHERE address = '$ip'";
-    echo $sqlUpdate;
+    error_log("Record found. Updating...\n", 3, LOG_FILE);
 
     if ($conn->query($sqlUpdate) === TRUE) {
+        error_log("Record updated successfully\n", 3, LOG_FILE);
         echo 'Record updated successfully';
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        error_log("Error updating record." . $sql . "<br>" . $conn->error . "\n", 3, LOG_FILE);
+        echo 'Error updating record';
     }
 } else {
     // New node so need to add it
     
     // First get geolocation data.
+    error_log("Record not found. Calling geolocation.\n", 3, LOG_FILE);
     $geoUrl = "https://tools.keycdn.com/geo.json?host=$ip";
     $curl = curl_init($geoUrl);
     curl_setopt($curl, CURLOPT_URL, $geoUrl);
@@ -85,7 +94,7 @@ if ($result->num_rows > 0) {
     // Call API to retrieve geolocation
     $responseJson = curl_exec($curl);
     $responseDecoded = json_decode($responseJson);
-    
+
     if($responseDecoded->status == 'success' && $responseDecoded->data->geo->ip == $ip) {
         // If geolocation returned success and IP matches, set that info
         $latitude = $responseDecoded->data->geo->latitude;
@@ -93,17 +102,21 @@ if ($result->num_rows > 0) {
         $continent = $responseDecoded->data->geo->continent_code;
         $country = $responseDecoded->data->geo->country_code;
 
+        error_log("Geolocation retrieved successfully. Inserting...\n", 3, LOG_FILE);
         $sqlInsert = "INSERT INTO nodes(address, version, latitude, longitude, continent_code, country_code) VALUES ('$ip', '$version', $latitude, $longitude, '$continent', '$country')";
     } else {
         // If geolocation failed, just set what we have
+        error_log("Issue getting Geolocation. Inserting...\n", 3, LOG_FILE);
         $sqlInsert = "INSERT INTO nodes(address, version) VALUES ('$ip', '$version')";
     }
 
     // Insert new record to database
     if ($conn->query($sqlInsert) === TRUE) {
+        error_log("New record created successfully\n", 3, LOG_FILE);
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        error_log("Error creating new record" . $sql . "<br>" . $conn->error . " \n", 3, LOG_FILE);
+        echo "Error creating new record";
     }
 
     curl_close($curl);
@@ -113,6 +126,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 
 // Just return success
+error_log("Returning Success.\n", 3, LOG_FILE);
 http_response_code(200);
 
 ?>

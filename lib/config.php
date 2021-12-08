@@ -9,6 +9,8 @@ define('DB_DATABASE_NAME', 'node_map');
 define('DB_USER_NAME', 'YOUR_DATABASE_USER_NAME');
 define('DB_USER_PASSWORD', 'YOUR_DATABASE_USER_PASSWORD');
 
+define('LOG_FILE', "/var/www/logs/php.log");
+
 define('DEBUG', true);
 
 header('Content-Type: application/json');
