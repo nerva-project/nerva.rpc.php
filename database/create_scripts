@@ -7,11 +7,11 @@ GRANT ALL PRIVILEGES ON node_map.* TO 'your_user'@'localhost';
 FLUSH PRIVILEGES;
 
 CREATE TABLE nodes (
-    address             VARCHAR(20) NOT NULL PRIMARY KEY,
+    address             VARCHAR(46) NOT NULL PRIMARY KEY,
     version             VARCHAR(20),
     last_access_time    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     latitude            FLOAT,
     longitude           FLOAT,
-    continent_code      VARCHAR(10),
-    country_code        VARCHAR(10)
+    continent_code      VARCHAR(5),
+    country_code        VARCHAR(5)
 );

@@ -3,6 +3,12 @@
 require_once('../../lib/config.php');
 require_once('../../lib/analytics_helper.php');
 
+if(ANALYTICS_DISABLED) {
+    echo 'Analytics disabled.';
+    http_response_code(200);
+    return;
+}
+
 $servername = DB_SERVER_NAME;
 $dbname = DB_DATABASE_NAME;
 $username = DB_USER_NAME;
@@ -41,6 +47,7 @@ if ($ua == "NA" || substr($ua, 0, 9) != "nerva-cli") {
     return;
 }
 
+$version = substr($ua, 10);
 
 // Create database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -50,12 +57,10 @@ if ($conn->connect_error) {
 
 // Query to see if node already known
 $sql = "SELECT * FROM nodes WHERE address = '$ip'";
-echo $sql;
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-    // Node already known so just update it
-    $version = substr($ua, 10);
+    // Node already known so just update it    
     $sqlUpdate = "UPDATE nodes SET version = '$version' WHERE address = '$ip'";
     echo $sqlUpdate;
 
@@ -67,8 +72,8 @@ if ($result->num_rows > 0) {
 } else {
     // New node so need to add it
     
-    // First get GEO location data
-    $geoUrl = "https://tools.keycdn.com/geo.json?host='$ip'";
+    // First get geolocation data.
+    $geoUrl = "https://tools.keycdn.com/geo.json?host=$ip";
     $curl = curl_init($geoUrl);
     curl_setopt($curl, CURLOPT_URL, $geoUrl);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -76,23 +81,33 @@ if ($result->num_rows > 0) {
         "User-Agent: keycdn-tools:https://map.nerva.one",
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-    $respJson = curl_exec($curl);
-    echo $respJson;
 
-    curl_close($curl);
-    var_dump($respJson);
+    // Call API to retrieve geolocation
+    $responseJson = curl_exec($curl);
+    $responseDecoded = json_decode($responseJson);
+    
+    if($responseDecoded->status == 'success' && $responseDecoded->data->geo->ip == $ip) {
+        // If geolocation returned success and IP matches, set that info
+        $latitude = $responseDecoded->data->geo->latitude;
+        $longitude = $responseDecoded->data->geo->longitude;
+        $continent = $responseDecoded->data->geo->continent_code;
+        $country = $responseDecoded->data->geo->country_code;
 
-    /*
-    $version = substr($ua, 10);
-    $sqlInsert = "INSERT INTO nodes(address, version) VALUES ('$ip', '$version')";
-    echo $sqlInsert;
+        $sqlInsert = "INSERT INTO nodes(address, version, latitude, longitude, continent_code, country_code) VALUES ('$ip', '$version', $latitude, $longitude, '$continent', '$country')";
+    } else {
+        // If geolocation failed, just set what we have
+        $sqlInsert = "INSERT INTO nodes(address, version) VALUES ('$ip', '$version')";
+    }
 
+    // Insert new record to database
     if ($conn->query($sqlInsert) === TRUE) {
         echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    */
+
+    curl_close($curl);
+    var_dump($responseJson);
 }
 
 $conn->close();
