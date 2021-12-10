@@ -41,18 +41,18 @@ if ($result->num_rows > 0) {
         }
 
         // Create JSON row
-        $nodes_json .= "{{\"version\":\"" . $row['version'] . 
+        $nodes_json .= "{\"version\":\"" . $row['version'] . 
             "\",\"time\":\"" . $row['last_access_time'] . 
             "\",\"lat\":\"" . $row['latitude'] . 
             "\",\"long\":\"" . $row['longitude'] . 
             "\",\"cn\":\"" . $row['continent_code'] . 
             "\",\"cc\":\"" . $row['country_code'] . 
-            "\"}}";
+            "\"}";
     }    
 }
 
 $nodes_json .= "]";
 error_log("FETCH:Returning JSON\n", 3, LOG_FILE);
-echo $nodes_json ;
+echo "{\"status\":\"OK\",\"result\":" . $nodes_json . "}\r\n";
 
 ?>
