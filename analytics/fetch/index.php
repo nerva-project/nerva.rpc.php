@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 
 // Get analytics records from database
 // TODO: Modify this to only pull for given number of days
-$sql = "SELECT * FROM nodes";
+$sql = "SELECT * FROM nodes WHERE last_access_time > date_sub(now(), interval 2 day)";
 
 error_log("FETCH:Pulling records from DB...\n", 3, LOG_FILE);
 
@@ -40,9 +40,17 @@ if ($result->num_rows > 0) {
             $nodes_json .= ",";
         }
 
+        $ipString = "*.*.*.*";
+        $ipArray = explode('.', $row['address']);        
+        if(count($ipArray) == 4)
+        {
+            $ipString = $ipArray[0] . ".*.*." . $ipArray[3];
+        }        
+
         // Create JSON row
         $nodes_json .= "{\"version\":\"" . $row['version'] . 
             "\",\"time\":\"" . $row['last_access_time'] . 
+            "\",\"ip\":\"" . $ipString .
             "\",\"lat\":\"" . $row['latitude'] . 
             "\",\"long\":\"" . $row['longitude'] . 
             "\",\"cn\":\"" . $row['continent_code'] . 
