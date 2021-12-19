@@ -67,7 +67,7 @@ error_log("SUBMIT:Looking up existing IP record: ". $ip . "\n", 3, LOG_FILE);
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Node already known so just update it    
-    $sqlUpdate = "UPDATE nodes SET version = '$version' WHERE address = '$ip'";
+    $sqlUpdate = "UPDATE nodes SET version = '$version', last_access_time = now() WHERE address = '$ip'";
     error_log("SUBMIT:Record found. Updating...\n", 3, LOG_FILE);
 
     if ($conn->query($sqlUpdate) === TRUE) {
