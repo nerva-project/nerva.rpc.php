@@ -4,7 +4,7 @@ require_once('../../lib/config.php');
 require_once('../../lib/analytics_helper.php');
 
 if(ANALYTICS_DISABLED) {
-    error_log("FETCH:Analytics diabled\n", 3, LOG_FILE);
+    error_log(date(DATE_ISO8601) . ": FETCH:Analytics diabled\n", 3, LOG_FILE);
     echo 'Analytics disabled.';
     http_response_code(200);
     return;
@@ -18,7 +18,7 @@ $password = DB_USER_PASSWORD;
 // Create database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
-    error_log("FETCH:Connection failed: ". $conn->connect_error . "\n", 3, LOG_FILE);
+    error_log(date(DATE_ISO8601) . ": FETCH:Connection failed: ". $conn->connect_error . "\n", 3, LOG_FILE);
     die("Connection failed: " . $conn->connect_error);
 }
 
@@ -26,12 +26,12 @@ if ($conn->connect_error) {
 // TODO: Modify this to only pull for given number of days
 $sql = "SELECT * FROM nodes WHERE last_access_time > date_sub(now(), interval 2 day)";
 
-error_log("FETCH:Pulling records from DB...\n", 3, LOG_FILE);
+error_log(date(DATE_ISO8601) . ": FETCH:Pulling records from DB...\n", 3, LOG_FILE);
 
 $nodes_json = "[";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-    error_log("FETCH:Records found. Building JSON. Count: " . $result->num_rows . "\n", 3, LOG_FILE);
+    error_log(date(DATE_ISO8601) . ": FETCH:Records found. Building JSON. Count: " . $result->num_rows . "\n", 3, LOG_FILE);
 
     while ($row = $result->fetch_assoc()) {
         if(strlen($nodes_json) > 3)
@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
 }
 
 $nodes_json .= "]";
-error_log("FETCH:Returning JSON\n", 3, LOG_FILE);
+error_log(date(DATE_ISO8601) . ": FETCH:Returning JSON\n", 3, LOG_FILE);
 echo "{\"status\":\"OK\",\"result\":" . $nodes_json . "}\r\n";
 
 ?>
