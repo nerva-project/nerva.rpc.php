@@ -28,7 +28,7 @@ if(isset($_SERVER["HTTP_CF_CONNECTING_IP"])){
 }
 
 //block common lan ip's
-if (starts_with($ip, "127.") || starts_with($ip, "10.") || starts_with($ip, "192.")) {
+if (starts_with($ip, "127") || starts_with($ip, "10") || starts_with($ip, "192.168")) {
     error_log("SUBMIT:Access from LAN addresses prohibited. IP: " . $ip . "\n", 3, LOG_FILE);
     echo 'Access from LAN addresses prohibited.';
     http_response_code(403);
