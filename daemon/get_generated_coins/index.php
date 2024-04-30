@@ -43,6 +43,11 @@ require_once('../../lib/helper.php');
     2022-11-25      2300000 - 2400000        30000.000000000000       18659659.789066506354
     2023-02-03      2400000 - 2500000        29999.997374167942       18689659.786440674296
     2023-04-13      2500000 - 2600000        29999.997248759902       18719659.783689434198
+    2023-06-22      2600000 - 2700000        30000.000000000000       18749659.783689434198
+    2023-08-30      2700000 - 2800000        29999.999738681372       18779659.783428115570
+    2023-11-08      2800000 - 2900000        29999.999661916530       18809659.783090032100
+    2024-01-16      2900000 - 3000000        29999.998791213836       18839659.781881245936
+    2024-03-26      3000000 - 3100000        29999.997550204366       18869659.779431450302
 
 
     print_coinbase_tx_sum 100 900       - Coins emitted from block 100, for 900 blocks (block 100 to 1000)
@@ -52,11 +57,13 @@ require_once('../../lib/helper.php');
     print_coinbase_tx_sum 1428137 1     - First block in tail emission (0.300000000000 in emissions)
 
     print_coinbase_tx_sum 2011487 1     - Block with base reward of less than 0.3 XNV: 0.299921494636 + 0.003588000000 in fees. Total reward: 0.303509494636
+
+    print_block 3100000                 - Information about block #3100000
 */
 
 
-$checkpoint_block_number = 2600000;
-$checkpoint_total_coins = 18719659.7837;        // Rounded to 4 digits after decimal
+$checkpoint_block_number = 3100000;
+$checkpoint_total_coins = 18869659.7794;        // Rounded to 4 digits after decimal
 $reward_per_block = 0.3;                        // We're in tail emission so each block is 0.3 XNV. Not 100%, but close enough
 
 $json = send_json_rpc_request(HOST, DAEMON_PORT, 'get_block_count', null);
