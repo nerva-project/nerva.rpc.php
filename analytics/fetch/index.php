@@ -23,7 +23,6 @@ if ($conn->connect_error) {
 }
 
 // Get analytics records from database
-// TODO: Modify this to only pull for given number of days
 $sql = "SELECT * FROM nodes WHERE last_access_time > date_sub(now(), interval 2 day)";
 
 error_log(date(DATE_ISO8601) . ": FETCH:Pulling records from DB...\n", 3, LOG_FILE);
@@ -56,7 +55,10 @@ if ($result->num_rows > 0) {
             "\",\"cn\":\"" . $row['continent_code'] . 
             "\",\"cc\":\"" . $row['country_code'] . 
             "\"}";
-    }    
+    }
+
+    $del_sql = "DELETE FROM nodes WHERE last_access_time < date_sub(now(), interval 3 day)";
+    $conn->query($del_sql);
 }
 
 $nodes_json .= "]";
