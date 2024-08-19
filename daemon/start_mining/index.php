@@ -16,6 +16,9 @@ if (!isset($_GET['address'])) {
     $error = true;
 }
 
+echo 'Fatal error. Start helping this project instead of trying to get free XNV!';
+$error = true;
+
 if ($error)
     exit;
 
