@@ -57,6 +57,9 @@ require_once('../../lib/helper.php');
     2025-07-25      3700000 - 3800000        30000.000000000000       19079659.769383853964
     2025-10-03      3800000 - 3900000        30000.000000000000       19109659.769383853964
     2025-12-11      3900000 - 4000000        30000.000000000000       19139659.769383853964
+    2026-02-18      4000000 - 4100000        29999.999231436900       19169659.768615290864
+    2026-04-29      4100000 - 4200000        29999.997852355076       19199659.766467645940
+    2026-07-07      4200000 - 4300000        30000.000000000000       19229659.766467645940
     
 
 
@@ -73,8 +76,8 @@ require_once('../../lib/helper.php');
 */
 
 
-$checkpoint_block_number = 4000000;
-$checkpoint_total_coins = 19139659.7694;        // Rounded to 4 digits after decimal
+$checkpoint_block_number = 4300000;
+$checkpoint_total_coins = 19229659.7665;        // Rounded to 4 digits after decimal
 $reward_per_block = 0.3;                        // We're in tail emission so each block is 0.3 XNV. Not 100%, but close enough
 
 $json = send_json_rpc_request(HOST, DAEMON_PORT, 'get_block_count', null);
