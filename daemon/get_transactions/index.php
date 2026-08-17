@@ -51,8 +51,9 @@ foreach ($txs as &$x)
     trim($f,'"');
     $f = str_replace(array("\\n", "\\r"), '', $f);
     $f = stripslashes($f);
-    $tx->block_height = $x->block_height;
-    $tx->block_timestamp = $x->block_timestamp;
+    // The daemon only sets these on confirmed transactions, pooled ones omit them
+    $tx->block_height = $x->block_height ?? null;
+    $tx->block_timestamp = $x->block_timestamp ?? null;
     $tx->double_spend_seen = $x->double_spend_seen;
     $tx->in_pool = $x->in_pool;
     if (isset($x->output_indices)) {
