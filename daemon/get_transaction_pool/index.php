@@ -40,6 +40,8 @@ foreach ($txs as &$x)
     $tx->double_spend_seen = $x->double_spend_seen;
     $tx->do_not_relay = $x->do_not_relay;
     $tx->fee = $x->fee;
+    $tx->weight = $x->weight ?? null;
+    $tx->blob_size = $x->blob_size ?? null;
     $tx->id_hash = $x->id_hash;
     $tx->kept_by_block = $x->kept_by_block;
     $tx->last_failed_height = $x->last_failed_height;
